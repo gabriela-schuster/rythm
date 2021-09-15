@@ -1,0 +1,149 @@
+* {
+	margin: 0;
+	border: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--light: #f9f9f9;
+	--bolder: #F45C43;
+	--bold: #EB3349;
+	--dark: #212429;
+	--secondary: #A4A4A4;
+
+	--gap-lg: 5rem;
+	--gap-md: 3rem;
+	--gap-sm: 1rem;
+
+	--bg: #394788;
+	--bg-darker: #233367
+}
+
+body {
+	background-color: var(--bg-darker);
+	color: var(--light);
+	font-family: 'Poppins', sans-serif;
+}
+
+.container {
+	max-width: 1200px;
+	margin:  0 auto;
+}
+section {
+	padding: 2rem 2rem;
+}
+
+h1 {
+	font-size: 70px;
+	font-weight: 900;
+	line-height: 80px;
+}
+h2 {
+	font-size: 40px;
+}
+h3 {
+	font-size: 20px;
+}
+h1, h2, h3 {
+	text-transform: uppercase;
+}
+p, a {
+	font-size: 16px;
+	line-height: 29px;
+}
+a {
+	color: inherit;
+}
+img {
+	max-width: 100%;
+}
+
+/* NAV */
+header {
+	max-width: 1200px;
+	margin: 0 auto;
+	margin-bottom: 1rem;
+
+	display: flex;
+	justify-content: space-between;
+}
+header a {
+	text-decoration: none;
+}
+nav img {
+	margin-left: 25px;
+	height: 25px;
+}
+
+/* HERO */
+.bg {
+	background: linear-gradient(130.02deg, var(--bolder) 0.66%, var(--bold) 83.32%);
+}
+.hero {
+	margin: 0 auto;
+	max-width: 1200px;
+	min-height: 100vh;
+
+	color: var(--light);
+}
+.hero-text {
+	min-height: 87vh;
+
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	justify-content: center;
+	align-items: center;
+	gap: var(--gap-lg);
+}
+.hero-text .button, .hero-text .button-ghost {
+	margin: var(--gap-sm) var(--gap-sm) var(--gap-sm) 0;
+}
+.hero h1 {
+	margin-top: var(--gap-sm);
+	margin-bottom: var(--gap-md);
+}
+
+/* BUTTONS */
+button {
+	cursor: hover;
+	font-family: inherit;
+	color: inherit;
+}
+.button, .button-ghost {
+	padding: 8px 40px;
+
+	text-transform: uppercase;
+	transform: skew(-20deg);
+	cursor: pointer;
+}
+.button > *, .button-ghost > * {
+	transform: skew(20deg);
+}
+.button {
+	background-color: var(--bolder);
+}
+.button-ghost {
+	background-color: transparent;
+	border: 2px solid var(--bolder);
+}
+
+/* MEDIA */
+@media (max-width: 900px) {
+	h1 {
+		font-size: 56px;
+	}
+	h2 {
+		font-size: 33px;
+	}
+	.hero-text {
+		margin-top: var(--gap-md);
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 400px) {
+	section {
+		padding: 2rem 1rem;
+	}
+}
