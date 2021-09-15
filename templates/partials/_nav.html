@@ -3,8 +3,11 @@
 <header>
 	<a href="{% url 'index' %}"><h3>Rythm</h3></a>
 	<nav>
-		<a href="#">
+		<a href="{% url 'dashboard' %}">
 			<img src="{% static 'icons/dashboard.svg' %}" alt="dashboard">
+		</a>
+		<a href="{% url 'dashboard' %}">
+			<img src="{% static 'icons/add.svg' %}" alt="add pulse">
 		</a>
 		<a href="#">
 			<img src="{% static 'icons/logout.svg' %}" alt="logout">

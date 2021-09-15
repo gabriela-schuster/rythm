@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block title %}| adicionar pulse {% endblock %}
+
+{% block content %}
+<section>
+
+	<div class="box mx-w">
+		<h3 class="align-center">Adicionar Pulse</h3>
+
+		<form action="{% url 'add_pulse' %}" method="POST">
+			{% csrf_token %}
+		</form>
+	</div>
+
+</section>
+{% endblock %}

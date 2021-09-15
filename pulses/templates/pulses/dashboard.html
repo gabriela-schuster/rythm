@@ -2,9 +2,39 @@
 
 {% block content %}
 <section>
-	{% include 'partials/_nav.html' %}
 
-	<h2>Dashboard</h2>
+	<div class="box align-center">
+		{% if not_concluded %}
+			<h2>{{not_concluded}}</h2>
+			<p class="mg-bt">{{not_concluded.description}}</p>
+		{% else %}
+			<h2>Nenhum pulse ativo</h2>
+		{% endif %}
+	</div>
+	
+	<div class="box">
+		<h3 class="mg-bt">últimos pulses</h3>
+		{% for pulse in three_pulses %}
+		<div class="line-between">
+			<h3 class="">{{pulse.conclusion_time}}xp</h3>
+			<p>{{pulse}}</p>
+		</div>
+		{% endfor %}
+	</div>
+
+	<div class="box">
+		<div class="line-between">
+			<h3>Camila</h3>
+			<p>level 2</p>
+		</div>
+
+		<div class="line">
+			<h3>{{concluded}}</h3>
+			<p>Pulses concluídos</p>
+		</div>
+
+		<a href="{% url 'add_pulse' %}" class="button">Adicionar pulse</a>
+	</div>
 
 </section>
 {% endblock %}
