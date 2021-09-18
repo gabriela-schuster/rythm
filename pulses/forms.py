@@ -8,7 +8,18 @@ class Pulseform(forms.ModelForm):
 		model = Pulse
 		fields = ['title', 'description', 'conclusion_time']
 
-	def __init__(self, *args, **kwargs):
-		super(Pulseform).__init__(*args, **kwargs)
-		for name, field in self.fields.items():
-			field.widget.attrs.update({'class': 'input'})
+	# def __init__(self, *args, **kwargs):
+	# 	super(Pulseform).__init__(*args, **kwargs)
+	# 	for name, field in self.fields.items():
+	# 		field.widget.attrs.update({'class': 'input'})
+
+	
+class PulseformAll(forms.ModelForm):
+	class Meta:
+		model = Pulse
+		fields = ['title', 'description', 'conclusion_time', 'concluded']
+
+	# def __init__(self, *args, **kwargs):
+	# 	super(Pulseform).__init__(*args, **kwargs)
+	# 	for name, field in self.fields.items():
+	# 		field.widget.attrs.update({'class': 'input'})

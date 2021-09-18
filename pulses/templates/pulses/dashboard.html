@@ -1,40 +1,69 @@
 {% extends 'main.html' %}
+{% load static %}
+
+{% block title %} - Dashboard {% endblock %}
 
 {% block content %}
-<section>
+<section class="dashboard-wrapper">
 
-	<div class="box align-center">
-		{% if not_concluded %}
-			<h2>{{not_concluded}}</h2>
-			<p class="mg-bt">{{not_concluded.description}}</p>
-		{% else %}
-			<h2>Nenhum pulse ativo</h2>
-		{% endif %}
-	</div>
+	<nav>
+		<a href="{% url 'logout' %}">{% static 'icons/logout.svg' %}</a>
+	</nav>
+
+	<div class="dashboard">
+
+		<div class="box align-center">
+			{% if not_concluded %}
+				<h2>{{not_concluded}}</h2>
+				<p class="mg-bt">{{not_concluded.description}}</p>
 	
-	<div class="box">
-		<h3 class="mg-bt">últimos pulses</h3>
-		{% for pulse in three_pulses %}
-		<div class="line-between">
-			<h3 class="">{{pulse.conclusion_time}}xp</h3>
-			<p>{{pulse}}</p>
+				<form method="POST">
+					{% csrf_token %}
+	
+					<input class="hide-input" type="text" name="title" value="{{not_concluded.title}}">
+					<input class="hide-input" type="text" name="description" value="{{not_concluded.description}}">
+					<input class="hide-input" type="text" name="conclusion_time" value="{{not_concluded.conclusion_time}}">
+					<input class="hide-input" type="checkbox" checked name="concluded">
+					<input type="submit" value="Concluir" class="button">
+				</form>
+				<!-- TODO: handle this POST and add conclusion_time to  -->
+				<!-- user.level_set.xp_total -->
+	
+			{% else %}
+				<h2>Nenhum pulse ativo</h2>
+			{% endif %}
 		</div>
-		{% endfor %}
+		
+		<div class="box span">
+			<div class="line-between">
+				<h3>{{user.username}}</h3>
+				{% for level in user_level %}
+					<p>Level: {{level}}</p>
+					<!-- TODO: / by 100 and get result ← level -->
+				{% endfor %}
+			</div>
+	
+			<div class="line">
+				<h3>{{concluded}}</h3>
+				<p>Pulses concluídos</p>
+			</div>
+	
+			<div class="dash-but">
+				<a href="#" class="button-ghost mg-bt">Ranking</a>
+				<a href="{% url 'add_pulse' %}" class="button">Adicionar pulse</a>
+			</div>
+		</div>
+	
+		<div class="box">
+			<h3 class="mg-bt">últimos pulses</h3>
+			{% for pulse in three_pulses %}
+			<div class="line-between">
+				<h3 class="">{{pulse.conclusion_time}}xp</h3>
+				<p>{{pulse}}</p>
+			</div>
+			{% endfor %}
+		</div>
+	
 	</div>
-
-	<div class="box">
-		<div class="line-between">
-			<h3>Camila</h3>
-			<p>level 2</p>
-		</div>
-
-		<div class="line">
-			<h3>{{concluded}}</h3>
-			<p>Pulses concluídos</p>
-		</div>
-
-		<a href="{% url 'add_pulse' %}" class="button">Adicionar pulse</a>
-	</div>
-
 </section>
 {% endblock %}

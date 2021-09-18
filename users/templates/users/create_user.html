@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<section>
+
+	<div class="box mx-w">
+		<h3 class="align-center">Bem vindo(a) ao rythm</h3>
+		
+		<form method="POST">
+			{% csrf_token %}
+
+			<div class="fields">
+				{% for field in form %}
+					<label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+					{{field}}
+					<!-- {% if field.help_text %}
+		        <p class="help">{{ field.help_text|safe }}</p>
+	        {% endif %} -->
+				{% endfor %}
+			</div>
+
+			<input type="submit" value="Cadastrar" class="button but-mt">
+		</form>
+	</div>
+
+</section>
+{% endblock %}

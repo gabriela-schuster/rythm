@@ -5,7 +5,7 @@
 <div class="bg">
 	<section class="hero">
 	
-		{% include 'partials/_nav.html' %}
+		<!-- {% include 'partials/_nav.html' %} -->
 	
 		<div class="hero-text">
 			<div>
@@ -13,8 +13,8 @@
 				<h1>Rythm, gamifique suas tarefas</h1>
 				<p>Com o Rythm, você pode transformar suas tarefas em um jogo, ganhar xp ao completar tarefas diárias e ser o primeiro no ranking mundial.</p>
 				<div>
-					<button class="button"><h3>Criar conta</h3></button>
-					<button class="button-ghost"><h3>Login</h3>
+					<a href="{% url 'create_user' %}" class="button"><h3>Criar conta</h3></a>
+					<a href="{% url 'login' %}" class="button-ghost"><h3>Entrar</h3></a>
 				</div>
 			</div>
 			<div>
