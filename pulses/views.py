@@ -1,16 +1,23 @@
 from typing import Collection
 from django.shortcuts import render, redirect
 from .models import Pulse
-from .forms import Pulseform, PulseformAll
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from .forms import Pulseform
 
 
 def index(req):
+	if req.user:
+		return redirect('dashboard')
 	return render(req, 'pulses/home.html')
 
 
+@login_required(login_url='login')
 def dashboard(req):
 	user = req.user
-	user_level = user.level_set.all()
+	user_level = user.level_set.get(user=user)
+
 	concluded = Pulse.objects.all().filter(player=user).filter(concluded=True)
 	three_pulses = Pulse.objects.all().filter(player=user).filter(
 		concluded=True)[len(concluded) - 3:]
@@ -28,13 +35,31 @@ def dashboard(req):
 	}
 
 	if req.method == 'POST':
-		form = PulseformAll(req.POST, instance=not_concluded)
-		form.save()
+		# creating a new Pulse object from hidden form, and deleting the
+		# not_concluded
+		title = req.POST.get('title')
+		description = req.POST.get('description')
+		conclusion_time = req.POST.get('conclusion_time')
+		player = user
+
+		pulse = Pulse.objects.create(player=player, title=title, description=description, conclusion_time=conclusion_time, concluded=True)
+
+		if not_concluded:
+			not_concluded.delete()
+
+		pulse.save()
+
+		actual_xp = int(conclusion_time) + int(user_level.xp_total)
+		user_level.xp_total = actual_xp
+		user_level.save()
+
 		return redirect('dashboard')
 
 	return render(req, 'pulses/dashboard.html', context)
+	# TODO: link created pulse and user, add xp
 
 
+@login_required(login_url='login')
 def add_pulse(req):
 	# user = req.user
 	form = Pulseform()
@@ -46,3 +71,9 @@ def add_pulse(req):
 			return redirect('dashboard')
 
 	return render(req, 'pulses/add_pulse.html', {'form': form})
+
+
+def ranking(req):
+	players = User.objects.all()
+	context = {'players': players}
+	return render(req, 'pulses/ranking.html', context)

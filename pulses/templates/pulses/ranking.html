@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+
+{% block title %} - Ranking global {% endblock %}
+
+{% block content %}
+<section class="ranking">
+
+	
+	{% include 'partials/_nav-side.html' %}
+	
+	<div class="ranking-wrapper">
+		<h2>TODO template</h2>
+
+		{% for player in players %}
+		<div class="box">
+			<div class="line">
+				<h3>{{player}}</h3> <p>{{player.level}}xp</p>
+			</div>
+			<div class="line">
+				<h3>30</h3><p>tarefas concluídas</p>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+
+</section>
+{% endblock %}

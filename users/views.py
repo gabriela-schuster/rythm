@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from .form import UserForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages, auth
-from django.contrib.auth.decorators import login_required
+
 
 def create_user(req):
 	form = UserForm()

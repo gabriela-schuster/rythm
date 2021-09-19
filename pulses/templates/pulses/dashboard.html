@@ -1,14 +1,11 @@
 {% extends 'main.html' %}
-{% load static %}
 
 {% block title %} - Dashboard {% endblock %}
 
 {% block content %}
 <section class="dashboard-wrapper">
 
-	<nav>
-		<a href="{% url 'logout' %}">{% static 'icons/logout.svg' %}</a>
-	</nav>
+	{% include 'partials/_nav-side.html' %}
 
 	<div class="dashboard">
 
@@ -23,11 +20,8 @@
 					<input class="hide-input" type="text" name="title" value="{{not_concluded.title}}">
 					<input class="hide-input" type="text" name="description" value="{{not_concluded.description}}">
 					<input class="hide-input" type="text" name="conclusion_time" value="{{not_concluded.conclusion_time}}">
-					<input class="hide-input" type="checkbox" checked name="concluded">
 					<input type="submit" value="Concluir" class="button">
 				</form>
-				<!-- TODO: handle this POST and add conclusion_time to  -->
-				<!-- user.level_set.xp_total -->
 	
 			{% else %}
 				<h2>Nenhum pulse ativo</h2>
@@ -37,10 +31,7 @@
 		<div class="box span">
 			<div class="line-between">
 				<h3>{{user.username}}</h3>
-				{% for level in user_level %}
-					<p>Level: {{level}}</p>
-					<!-- TODO: / by 100 and get result ← level -->
-				{% endfor %}
+				<p>xp total: {{user_level}}</p>
 			</div>
 	
 			<div class="line">
@@ -49,7 +40,7 @@
 			</div>
 	
 			<div class="dash-but">
-				<a href="#" class="button-ghost mg-bt">Ranking</a>
+				<a href="{% url 'ranking' %}" class="button-ghost mg-bt">Ranking</a>
 				<a href="{% url 'add_pulse' %}" class="button">Adicionar pulse</a>
 			</div>
 		</div>
