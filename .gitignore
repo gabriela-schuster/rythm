@@ -3,3 +3,6 @@ bin/
 rythm/.env
 .env
 pyvenv.cfg
+pulses/__pychache__
+rythm/__pychache__
+users/__pychache__

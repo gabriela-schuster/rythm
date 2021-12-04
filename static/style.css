@@ -6,8 +6,8 @@
 }
 
 :root {
-	--light: #f9f9f9;
-	--bolder: #e95d5e;
+	--light: #e9eff2;
+	--bolder: #e95d5e;	/* #66da79 */
 	--bold: #edc154;
 	--secondary: #A4A4A4;
 
@@ -15,8 +15,8 @@
 	--gap-md: 3rem;
 	--gap-sm: 1rem;
 
-	--bg: #272B34;
-	--bg-darker: #1A1C20;
+	--bg: #252b33;
+	--bg-darker: #191E24;
 }
 
 body {
@@ -112,6 +112,10 @@ nav.side {
 
 	border-radius: 15px;
 	background-color: var(--bg);
+}
+nav.side img {
+	width: 100%;
+	margin: 0 !important;
 }
 
 /* FORM */

@@ -10,7 +10,8 @@ from .forms import Pulseform
 def index(req):
 	if req.user:
 		return redirect('dashboard')
-	return render(req, 'pulses/home.html')
+	else:
+		return render(req, 'pulses/home.html')
 
 
 @login_required(login_url='login')
@@ -19,8 +20,18 @@ def dashboard(req):
 	user_level = user.level_set.get(user=user)
 
 	concluded = Pulse.objects.all().filter(player=user).filter(concluded=True)
-	three_pulses = Pulse.objects.all().filter(player=user).filter(
-		concluded=True)[len(concluded) - 3:]
+	try:
+		three_pulses = Pulse.objects.all().filter(player=user).filter(
+			concluded=True)
+
+		if len(three_pulses) == 1 or len(three_pulses) == 2:
+			three_pulses = three_pulses
+		else:
+			three_pulses = three_pulses[len(concluded) - 3:]
+	except:
+		# if user didn't complete three pulses
+		three_pulses = None
+
 	try:
 		not_concluded = Pulse.objects.all().filter(concluded=False).latest('title')
 	except:
@@ -56,7 +67,6 @@ def dashboard(req):
 		return redirect('dashboard')
 
 	return render(req, 'pulses/dashboard.html', context)
-	# TODO: link created pulse and user, add xp
 
 
 @login_required(login_url='login')

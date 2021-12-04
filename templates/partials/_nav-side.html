@@ -1,5 +1,7 @@
 {% load static %}
 
 <nav class="side">
-	<a href="{% url 'logout' %}">{% static 'hero-img.svg' %}</a>
+	<a href="{% url 'logout' %}">
+		<img src="{% static 'icons/logout.svg' %}" alt="Logout">
+	</a>
 </nav>
