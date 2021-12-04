@@ -39,3 +39,23 @@ e inicie o server na porta 8000 com
 ```
 $ ./manage.py runserver
 ```
+
+## Suporte ao Docker
+
+### Construção da imagem
+
+Rodar comando de build para criar imagem com as dependências instaladas.
+
+```
+$ docker-compose build
+```
+
+### Execução do serviço
+
+Na primeira vez que for levantado o serviço, será realizada a configuração do banco de dados e criação do usuário super administrador.
+
+```
+$ docker-compose up
+```
+
+O serviço é servido no endereço `http://localhost:8000`. E as credenciais de acesso do super administrador são `admin/admin`.
