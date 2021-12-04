@@ -1,0 +1,34 @@
+version: "2.0"
+
+services:
+  db:
+    image: mariadb:10.6
+    volumes:
+      - db-data:/var/lib/mysql/data
+    ports:
+      - "3306:3306"
+    environment:
+      - MARIADB_RANDOM_ROOT_PASSWORD=yes
+      - MARIADB_DATABASE=rythm
+      - MARIADB_USER=rythm
+      - MARIADB_PASSWORD=rythm
+
+  web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    entrypoint: [ "./docker/docker-entrypoint.sh" ]
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    environment:
+      - MARIADB_HOST=db
+      - MARIADB_DATABASE=rythm
+      - MARIADB_USER=rythm
+      - MARIADB_PASSWORD=rythm
+    depends_on:
+      - db
+
+volumes:
+  db-data:

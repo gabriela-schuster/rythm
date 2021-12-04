@@ -71,10 +71,10 @@ WSGI_APPLICATION = 'rythm.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'USER': 'indigomysql',
-        'PASSWORD': env('PASSWORD'),
-        'HOST': '127.0.0.1',
-        'NAME': 'rythm'
+        'USER': env('MARIADB_USER'),
+        'PASSWORD': env('MARIADB_PASSWORD'),
+        'HOST': env('MARIADB_HOST'),
+        'NAME': env('MARIADB_DATABASE')
     }
 }
 
